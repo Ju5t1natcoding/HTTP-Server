@@ -1,0 +1,32 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install MinGW
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: UCRT64
+        install: mingw-w64-ucrt-x86_64-gcc
+
+    - name: Build server
+      shell: msys2 {0}
+      run: g++ -std=c++17 main.cpp HttpResponse.cpp HttpRequest.cpp Router.cpp FileServer.cpp ThreadPool.cpp -o server -lws2_32
+
+    - name: Build tests
+      shell: msys2 {0}
+      run: g++ -std=c++17 tests/tests.cpp HttpRequest.cpp HttpResponse.cpp Router.cpp -o tests/run_tests -lws2_32
+
+    - name: Run tests
+      shell: msys2 {0}
+      run: ./tests/run_tests

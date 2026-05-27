@@ -1,0 +1,4 @@
+server.exe
+tests/run_tests.exe
+*.o
+*.exe
