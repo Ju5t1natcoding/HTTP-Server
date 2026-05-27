@@ -86,5 +86,7 @@ g++ -std=c++17 tests/tests.cpp HttpRequest.cpp HttpResponse.cpp Router.cpp -o te
 Expected output:
 
 ```
-[doctest] test cases: 6 | 6 passed | 0 failed
+[doctest] test cases: 6 | 6 passed | 0 failed | 0 skipped
+[doctest] assertions: 9 | 9 passed | 0 failed |
+[doctest] Status: SUCCESS!
 ```
